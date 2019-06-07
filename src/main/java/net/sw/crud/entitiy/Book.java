@@ -1,5 +1,7 @@
 package net.sw.crud.entitiy;
 
+import net.sw.crud.error.validator.Author;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Book {
     @NotEmpty(message = "Please enter a name")
     private String name;
 
+    @Author
     @NotEmpty(message = "Please enter a author")
     private String author;
 

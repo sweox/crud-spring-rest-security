@@ -7,15 +7,18 @@ import net.sw.crud.error.BookUnSupportedFieldPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 @RestController
+@Validated
 public class BookController {
 
     @Autowired
@@ -37,7 +40,7 @@ public class BookController {
 
     // Find book by id
     @GetMapping("/books/{id}")
-    public Book findOne(@PathVariable Long id) {
+    public Book findOne(@PathVariable @Min(1) Long id) {
 
         return repository
                 .findById(id)
