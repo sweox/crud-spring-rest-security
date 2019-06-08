@@ -39,7 +39,7 @@ public class BookControllerRestTemplateTest {
         {
             "timestamp":"2019-03-05T09:34:13.280+0000",
             "status":400,
-            "errors":["Author is not allowed.","Please provide a price","Please provide a author"]
+            "errors":["Author is not allowed.","Please enter a price","Please enter a author"]
         }
      */
     @Test
@@ -55,7 +55,7 @@ public class BookControllerRestTemplateTest {
         ResponseEntity<String> response = restTemplate.postForEntity("/books", entity, String.class);
         //printJSON(response);
 
-        String expectedJson = "{\"status\":400,\"errors\":[\"Author is not allowed.\",\"Please provide a price\",\"Please provide a author\"]}";
+        String expectedJson = "{\"status\":400,\"errors\":[\"Author is not allowed.\",\"Please enter a price\",\"Please enter a author\"]}";
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         JSONAssert.assertEquals(expectedJson, response.getBody(), false);
 
@@ -73,7 +73,7 @@ public class BookControllerRestTemplateTest {
     @Test
     public void save_invalidAuthor_400() throws JSONException {
 
-        String bookInJson = "{\"name\":\" Spring REST tutorials\", \"author\":\"abc\",\"price\":\"9.99\"}";
+        String bookInJson = "{\"name\":\"Spring REST tutorials\", \"author\":\"abc\",\"price\":\"9.99\"}";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
